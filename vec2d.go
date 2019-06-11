@@ -72,8 +72,8 @@ func (v Vec2D) Trunc(maxl float64) Vec2D {
 
 // Reverse creates a new vector in the opposite direction of the original vector.
 func (v Vec2D) Reverse() Vec2D {
-	v.X = -v.X
-	v.Y = -v.Y
+	v.X *= -1
+	v.Y *= -1
 	return v
 }
 
@@ -95,11 +95,11 @@ func (v Vec2D) AngleBetween(v2 Vec2D) float64 {
 
 // Perp creates a new vector which is perpendicular to the original vector.
 func (v Vec2D) Perp() Vec2D {
-	v.Y = -v.Y
+	v.X, v.Y = v.Y*-1, v.X
 	return v
 }
 
-/*
+// Sign provides a value if a vector is to the left (-1) or right (1) of another vector.
 func (v Vec2D) Sign(v2 Vec2D) int {
 	v1 := v.Perp()
 	val := v1.DotProd(v2)
@@ -108,7 +108,6 @@ func (v Vec2D) Sign(v2 Vec2D) int {
 	}
 	return 1
 }
-*/
 
 // DistSq provides the squared distance between two given vectors.
 func (v Vec2D) DistSq(v2 Vec2D) float64 {

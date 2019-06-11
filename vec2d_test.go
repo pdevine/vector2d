@@ -100,6 +100,10 @@ func TestReverse(t *testing.T) {
 	if !almostEqual(v2.X, -a) && almostEqual(v2.Y, -b) {
 		t.Errorf("Expected vector (%h,%h), got (%h,%h)", -a, -b, v2.X, v2.Y)
 	}
+	v3 := v2.Reverse()
+	if !almostEqual(v3.X, a) && almostEqual(v3.Y, b) {
+		t.Errorf("Expected vector (%h,%h), got (%h,%h)", a, b, v3.X, v3.Y)
+	}
 }
 
 func TestTrunc(t *testing.T) {
@@ -142,31 +146,34 @@ func TestAngleBetween(t *testing.T) {
 }
 
 func TestPerpVector(t *testing.T) {
-	v1 := NewVec2D(1.0, 1.0)
+	v1 := NewVec2D(2.0, 1.0)
 	v2 := v1.Perp()
-	if !almostEqual(v2.X, v1.X) || !almostEqual(v2.Y, -v1.Y) {
-		t.Error("Expected perp fector")
+	if !almostEqual(v2.X, -v1.Y) || !almostEqual(v2.Y, v1.X) {
+		t.Error("Expected perp vector")
 	}
 	val := v1.DotProd(v2)
 	if !almostEqual(val, 0) {
 		t.Error("Expect zero dot product for a perpendicular vect, got ", val)
 	}
+	v1 = NewVec2D(-2.0, -1.0)
+	v2 = v1.Perp()
+	if !almostEqual(v2.X, 1.0) || !almostEqual(v2.Y, -2.0) {
+		t.Error("Expected perp vector (%h,%h), got (%h,%h)", 1.0, -2.0, v2.X, v2.Y)
+	}
 }
 
-/*
 func TestSign(t *testing.T) {
-	v1 := NewVec2D(0.0, 1.0)
+	v1 := NewVec2D(-1.0, 1.0)
 	v2 := NewVec2D(1.0, 0.0)
-	val := v2.Sign(v1)
-		if val != -1 {
-			t.Error("Expected angle to the left (-1), got ", val)
-		}
-		val = v2.Sign(v1)
-		if val != 1 {
-			t.Error("Expected angle to the right (1), got ", val)
-		}
+	val := v1.Sign(v2)
+	if val != -1 {
+		t.Error("Expected angle to the left (-1), got ", val)
+	}
+	val = v2.Sign(v1)
+	if val != 1 {
+		t.Error("Expected angle to the right (1), got ", val)
+	}
 }
-*/
 
 func TestDist(t *testing.T) {
 	a, b := 6.0, 8.0
