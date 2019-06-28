@@ -30,7 +30,7 @@ func TestSetAngle(t *testing.T) {
 	v := NewVec2D(1, 0)
 	v = v.SetAngle(math.Pi / 2)
 	if !almostEqual(v.X, 0) && !almostEqual(v.Y, 1.0) {
-		t.Errorf("Set angle to Pi/2 radians, got x = %h y = %h", v.X, v.Y)
+		t.Errorf("Set angle to Pi/2 radians, got x = %f y = %f", v.X, v.Y)
 	}
 }
 
@@ -49,7 +49,7 @@ func TestSetLen(t *testing.T) {
 	v := NewVec2D(a, b)
 	v = v.SetLen(g)
 	if !almostEqual(v.X, e) || !almostEqual(v.Y, f) {
-		t.Errorf("Expected 6, 8, 10 triangle, got x=%h, y=%h", v.X, v.Y)
+		t.Errorf("Expected 6, 8, 10 triangle, got x=%f, y=%f", v.X, v.Y)
 	}
 }
 
@@ -61,7 +61,7 @@ func TestNormZero(t *testing.T) {
 		t.Error("Expected normalized vector, got len ", l)
 	}
 	if !almostEqual(z.X, 1.0) || !almostEqual(z.Y, 0.0) {
-		t.Errorf("Expected normalized vector (1,0), got (%h,%h)", z.X, z.Y)
+		t.Errorf("Expected normalized vector (1,0), got (%f,%f)", z.X, z.Y)
 	}
 }
 
@@ -95,14 +95,14 @@ func TestReverse(t *testing.T) {
 	l1 := v1.Len()
 	l2 := v2.Len()
 	if !almostEqual(l1, l2) {
-		t.Errorf("Expected vector lengths to be equal: %h vs %h", l1, l2)
+		t.Errorf("Expected vector lengths to be equal: %f vs %f", l1, l2)
 	}
 	if !almostEqual(v2.X, -a) && almostEqual(v2.Y, -b) {
-		t.Errorf("Expected vector (%h,%h), got (%h,%h)", -a, -b, v2.X, v2.Y)
+		t.Errorf("Expected vector (%f,%f), got (%f,%f)", -a, -b, v2.X, v2.Y)
 	}
 	v3 := v2.Reverse()
 	if !almostEqual(v3.X, a) && almostEqual(v3.Y, b) {
-		t.Errorf("Expected vector (%h,%h), got (%h,%h)", a, b, v3.X, v3.Y)
+		t.Errorf("Expected vector (%f,%f), got (%f,%f)", a, b, v3.X, v3.Y)
 	}
 }
 
@@ -158,7 +158,7 @@ func TestPerpVector(t *testing.T) {
 	v1 = NewVec2D(-2.0, -1.0)
 	v2 = v1.Perp()
 	if !almostEqual(v2.X, 1.0) || !almostEqual(v2.Y, -2.0) {
-		t.Error("Expected perp vector (%h,%h), got (%h,%h)", 1.0, -2.0, v2.X, v2.Y)
+		t.Errorf("Expected perp vector (%f,%f), got (%f,%f)", 1.0, -2.0, v2.X, v2.Y)
 	}
 }
 
@@ -184,7 +184,7 @@ func TestDist(t *testing.T) {
 	v2 := NewVec2D(c, d)
 	dist := v2.Dist(v1)
 	if !almostEqual(dist, e) {
-		t.Errorf("Expected vector dist is %h, got %h", e, dist)
+		t.Errorf("Expected vector dist is %f, got %f", e, dist)
 	}
 }
 
@@ -195,7 +195,7 @@ func TestAddVec(t *testing.T) {
 	v3 := v1.Add(v2)
 	l := v3.Len()
 	if !almostEqual(l, c) {
-		t.Errorf("Expected vector len is %h, got %h", c, l)
+		t.Errorf("Expected vector len is %f, got %f", c, l)
 	}
 }
 
@@ -207,7 +207,7 @@ func TestSubVec(t *testing.T) {
 	v3 := v1.Subtract(v2)
 	l := v3.Len()
 	if !almostEqual(l, c) {
-		t.Errorf("Expected vector len is %h, got %h", c, l)
+		t.Errorf("Expected vector len is %f, got %f", c, l)
 	}
 }
 
@@ -217,7 +217,7 @@ func TestMultiplyVal(t *testing.T) {
 	v2 := v1.Multiply(2.0)
 	l := v2.Len()
 	if !almostEqual(l, c) {
-		t.Errorf("Expected vector len is %h, got %h", c, l)
+		t.Errorf("Expected vector len is %f, got %f", c, l)
 	}
 }
 
@@ -227,6 +227,6 @@ func TestDivideVec(t *testing.T) {
 	v2 := v1.Divide(2.0)
 	l := v2.Len()
 	if !almostEqual(l, c) {
-		t.Errorf("Expected vector len is %h, got %h", c, l)
+		t.Errorf("Expected vector len is %f, got %f", c, l)
 	}
 }
